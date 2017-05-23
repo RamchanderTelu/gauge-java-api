@@ -25,8 +25,9 @@ Internal Server Error is returned when doing a GET to the /internal_server_error
 OK of the last response is returned when doing a GET to /internal_server_error/last endpoint
 -------------------------------------------------------------------------------------------
 
-* Get to the "internal_server_error/last" endpoint
+* Get to the "forbidden/last" endpoint
 * Then the response will be "OK"
 * The response code should be "200"
-* The last updated date/time for the latest POST
+* Retrieve the last updated time from the "internal_server_error/last" endpoint
+* Assert against last updated time "internal_server_error" endpoint
  
