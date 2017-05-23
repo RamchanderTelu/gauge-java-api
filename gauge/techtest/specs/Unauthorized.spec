@@ -23,8 +23,10 @@ Unauthorized is returned when doing a GET to the /unauthorized endpoint
 
 OK along with the last updated date/time for the latest POST response is returned when doing a GET to /unauthorized/last endpoint
 ---------------------------------------------------------------------------------------
+ 
 
-* Get to the "unauthorized/last" endpoint
+* Get to the "forbidden/last" endpoint
 * Then the response will be "OK"
 * The response code should be "200"
-* The last updated date/time for the latest POST
+* Retrieve the last updated time from the "unauthorized/last" endpoint
+* Assert against last updated time "unauthorized" endpoint
