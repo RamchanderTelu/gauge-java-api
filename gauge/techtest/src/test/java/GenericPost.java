@@ -21,6 +21,7 @@ public class GenericPost {
                     .header("Accept", "*/*")
                     .body("{\"test\": 123}")
                     .asString();
+            // getting system time at post operation
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");            
             LocalDateTime now = LocalDateTime.now();
             dataStore.put("httpResponse", httpResponse);
@@ -28,6 +29,7 @@ public class GenericPost {
             dataStore.put("httpResponseCode", httpResponseCode);
             String httpResponseStatusText = httpResponse.getStatusText();
             dataStore.put("httpResponseStatusText", httpResponseStatusText);
+             // Adding Expected update time into datastore so that it can be used for assertion
             datsStore.put("ExpectedUpdateTime"+ endpoint, dtf.format(now));
          //   Gauge.writeMessage(httpResponse.getBody());
             Gauge.writeMessage(httpResponseStatusText);
