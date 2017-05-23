@@ -6,12 +6,16 @@ import com.thoughtworks.gauge.Gauge;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.datastore.DataStore;
 import com.thoughtworks.gauge.datastore.DataStoreFactory;
+import org.junit.Assert;
+import java.time.LocalDateTime; 
 
 public class GenericGet {
     @Step("Retrieve the last updated time from the <endpoint> endpoint")
     public void GetEndPoint(String endpoint) {
         DataStore dataStore = DataStoreFactory.getScenarioDataStore();
         HttpResponse<JsonNode> httpResponse;
+       
+        String[] endpointparts = endpoint.split("/");
         String url = "http://localhost:3000/" + endpoint;
         try {
             httpResponse = Unirest.get(url)
@@ -24,7 +28,7 @@ public class GenericGet {
             Gauge.writeMessage(httpResponseStatusText);
             Gauge.writeMessage(httpResponse.getBody().toString());             
             String updatedTime = httpResponse.getBody().getObject().getJSONArray("internal_server_error").getJSONObject(0).get("lastUpdated").toString();
-            dataStore.put("ActualUpdatedTime" + endpoint, updatedTime);            
+            dataStore.put("ActualUpdatedTime" + endpointparts[0], updatedTime);            
            
         }
         catch (UnirestException e) {
@@ -61,7 +65,8 @@ public class GenericGet {
 
 
     @Step("Assert against last updated time <endpoint> endpoint")
-    public void AssertLastUpdatedTime() {
-         
+    public void AssertLastUpdatedTime(String endpoint) {       
+         String[] endpointparts = endpoint.split("/");
+        Assert.assertEquals((LocalDateTime) dataStore.get("ActualUpdatedTime" + endpointparts[0], (LocalDateTime)dataStore.get("ExpectedUpdatedTime" + endpointparts[0]);
     }
 }
