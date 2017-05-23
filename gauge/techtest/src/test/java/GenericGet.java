@@ -24,7 +24,8 @@ public class GenericGet {
             Gauge.writeMessage(httpResponseStatusText);
             Gauge.writeMessage(httpResponse.getBody().toString());             
             String updatedTime = httpResponse.getBody().getObject().getJSONArray("internal_server_error").getJSONObject(0).get("lastUpdated").toString();
-            dataStore.put("ActualUpdatedTime", updatedTime);
+            dataStore.put("ActualUpdatedTime" + endpoint, updatedTime);            
+           
         }
         catch (UnirestException e) {
             e.printStackTrace();
@@ -59,8 +60,8 @@ public class GenericGet {
     }
 
 
-    @Step("Assert against last updated time")
+    @Step("Assert against last updated time <endpoint> endpoint")
     public void AssertLastUpdatedTime() {
-        //TO DO
+         
     }
 }
