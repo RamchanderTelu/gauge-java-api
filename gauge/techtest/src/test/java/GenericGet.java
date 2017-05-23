@@ -65,8 +65,7 @@ public class GenericGet {
 
 
     @Step("Assert against last updated time <endpoint> endpoint")
-    public void AssertLastUpdatedTime(String endpoint) {       
-         String[] endpointparts = endpoint.split("/");
-        Assert.assertEquals((LocalDateTime) dataStore.get("ActualUpdatedTime" + endpointparts[0], (LocalDateTime)dataStore.get("ExpectedUpdatedTime" + endpointparts[0]);
+    public void AssertLastUpdatedTime(String endpoint) {                
+        Assert.assertEquals((LocalDateTime) dataStore.get("ActualUpdatedTime" + endpoint, (LocalDateTime)dataStore.get("ExpectedUpdatedTime" +endpoint);
     }
 }
