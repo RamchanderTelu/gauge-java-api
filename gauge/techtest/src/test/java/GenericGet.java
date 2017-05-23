@@ -28,6 +28,7 @@ public class GenericGet {
             Gauge.writeMessage(httpResponseStatusText);
             Gauge.writeMessage(httpResponse.getBody().toString());             
             String updatedTime = httpResponse.getBody().getObject().getJSONArray("internal_server_error").getJSONObject(0).get("lastUpdated").toString();
+            // Adding Actual update time into datastore so that it can be used for assertion
             dataStore.put("ActualUpdatedTime" + endpointparts[0], updatedTime);            
            
         }
@@ -65,7 +66,8 @@ public class GenericGet {
 
 
     @Step("Assert against last updated time <endpoint> endpoint")
-    public void AssertLastUpdatedTime(String endpoint) {                
+    public void AssertLastUpdatedTime(String endpoint) {     
+        // Added assertion to compare posted date and actual date
         Assert.assertEquals((LocalDateTime) dataStore.get("ActualUpdatedTime" + endpoint, (LocalDateTime)dataStore.get("ExpectedUpdatedTime" +endpoint);
     }
 }
