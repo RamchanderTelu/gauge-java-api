@@ -25,8 +25,7 @@ OK response is returned when doing a GET to /forbidden/last endpoint
 
 * Get to the "forbidden/last" endpoint
 * Then the response will be "OK"
-* The response code should be "200"
-* The last updated date/time for the latest POST
+* The response code should be "200" 
 * Retrieve the last updated time from the "forbidden/last" endpoint
 * Assert against last updated time "forbidden" endpoint
  
