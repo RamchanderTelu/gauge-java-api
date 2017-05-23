@@ -20,10 +20,11 @@ public class GenericGet {
                     .asJson();
             dataStore.put("httpResponse", httpResponse);
             String httpResponseStatusText = httpResponse.getStatusText();
-            dataStore.put("httpResponseStatusText", httpResponseStatusText);
+            dataStore.put("httpResponseStatusText", httpResponseStatusText);           
             Gauge.writeMessage(httpResponseStatusText);
-            Gauge.writeMessage(httpResponse.getBody().toString());
+            Gauge.writeMessage(httpResponse.getBody().toString());             
             String updatedTime = httpResponse.getBody().getObject().getJSONArray("internal_server_error").getJSONObject(0).get("lastUpdated").toString();
+            dataStore.put("ActualUpdatedTime", updatedTime);
         }
         catch (UnirestException e) {
             e.printStackTrace();
