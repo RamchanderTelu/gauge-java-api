@@ -6,7 +6,7 @@ import com.thoughtworks.gauge.Gauge;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.datastore.DataStore;
 import com.thoughtworks.gauge.datastore.DataStoreFactory;
-
+import java.time.LocalDateTime;
 public class GenericPost {
 
     @Step("Post to the <endpoint> endpoint")
@@ -21,11 +21,14 @@ public class GenericPost {
                     .header("Accept", "*/*")
                     .body("{\"test\": 123}")
                     .asString();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");            
+            LocalDateTime now = LocalDateTime.now();
             dataStore.put("httpResponse", httpResponse);
             Integer httpResponseCode = httpResponse.getStatus();
             dataStore.put("httpResponseCode", httpResponseCode);
             String httpResponseStatusText = httpResponse.getStatusText();
             dataStore.put("httpResponseStatusText", httpResponseStatusText);
+            datsStore.put("ExpectedUpdateTime"+ endpoint, dtf.format(now));
          //   Gauge.writeMessage(httpResponse.getBody());
             Gauge.writeMessage(httpResponseStatusText);
 
