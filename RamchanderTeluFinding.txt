@@ -1,0 +1,19 @@
+Issue 1:
+http://localhost:3000/bad_request API is misleading for the post operation.
+Description say that 503 Gateway timeout response code when you try to do a POST, but in the response it says : Status 400 Bad Request
+
+
+Issue 2: 
+
+ http://localhost:3000/madeup API is missing the methods for POST and GET for madeup/last
+
+Issue 3: http://localhost:3000/unauthorized API Response is incorrect, I believe it should "Status 401 Unauthorized"
+
+
+-- Added few additional test cases spec files
+
+below are the some of the testing findings :
+
+Bug1 : for API no_reponse GET, response is "OK" instead "No Content"
+Bug2 : for API bad_request GET, response is "OK" instead "bad request" and response code is 200 instead of 400
+Bug3 : for API bad_request GET, response is "OK" instead "Internal Server Error" and response code is 200 instead of 500
