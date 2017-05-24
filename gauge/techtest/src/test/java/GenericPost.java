@@ -30,7 +30,7 @@ public class GenericPost {
             String httpResponseStatusText = httpResponse.getStatusText();
             dataStore.put("httpResponseStatusText", httpResponseStatusText);
              // Adding Expected update time into datastore so that it can be used for assertion
-            datsStore.put("ExpectedUpdateTime"+ endpoint, dtf.format(now));
+            datsStore.put("ExpectedUpdateTime" , dtf.format(now));
          //   Gauge.writeMessage(httpResponse.getBody());
             Gauge.writeMessage(httpResponseStatusText);
 
