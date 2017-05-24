@@ -67,6 +67,6 @@ public class GenericGet {
     @Step("Assert against last updated time <endpoint> endpoint")
     public void AssertLastUpdatedTime(String endpoint) {     
         // Added assertion to compare posted date and actual date
-        Assert.assertEquals((LocalDateTime) dataStore.get("ActualUpdatedTime" + endpoint, (LocalDateTime)dataStore.get("ExpectedUpdatedTime" +endpoint);
+        Assert.assertEquals((LocalDateTime) dataStore.get("ActualUpdatedTime") , (LocalDateTime)dataStore.get("ExpectedUpdatedTime"));
     }
 }
