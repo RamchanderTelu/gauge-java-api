@@ -13,9 +13,8 @@ public class GenericGet {
     @Step("Retrieve the last updated time from the <endpoint> endpoint")
     public void GetEndPoint(String endpoint) {
         DataStore dataStore = DataStoreFactory.getScenarioDataStore();
-        HttpResponse<JsonNode> httpResponse;
-       
-        String[] endpointparts = endpoint.split("/");
+        HttpResponse<JsonNode> httpResponse;      
+        
         String url = "http://localhost:3000/" + endpoint;
         try {
             httpResponse = Unirest.get(url)
@@ -29,7 +28,7 @@ public class GenericGet {
             Gauge.writeMessage(httpResponse.getBody().toString());             
             String updatedTime = httpResponse.getBody().getObject().getJSONArray("internal_server_error").getJSONObject(0).get("lastUpdated").toString();
             // Adding Actual update time into datastore so that it can be used for assertion
-            dataStore.put("ActualUpdatedTime" + endpointparts[0], updatedTime);            
+            dataStore.put("ActualUpdatedTime" , updatedTime);            
            
         }
         catch (UnirestException e) {
